@@ -2,7 +2,7 @@ const { Builder, By, Key, util, until } = require("selenium-webdriver");
 var numeral = require('numeral');
 let driver = new Builder().forBrowser('chrome').build();
 let urls = []
-let coefficient = [] // (likes/views) * (likes/dislikes)
+let coefficient = [] // (likes/views) * (likes/ (likes + dislikes))
 let bestvideo = ''
 
 
