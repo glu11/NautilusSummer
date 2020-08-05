@@ -4,14 +4,14 @@ const chrome = require('selenium-webdriver/chrome')
 const options = new chrome.Options()
 options.addArguments('--disable-dev-shm-usage')
 options.addArguments('--no-sandbox')
-options.addArguments('--headless') 
+options.addArguments('--headless')
 
 
 const driver = new Builder()
   .forBrowser('chrome')
   .setChromeOptions(options)
   .build()
-  
+
 let urls = []
 let coefficient = [] // (likes/views) * (likes/ (likes + dislikes))
 let bestvideo = ''
@@ -43,7 +43,10 @@ async function grabUrls() {
 
 async function computeCoefficient() {
   for (let i = 0; i < 3; i++) {
-    let driver1 = new Builder().forBrowser('chrome').build();
+    let driver1 = new Builder()
+      .forBrowser('chrome')
+      .setChromeOptions(options)
+      .build()
     await (await driver1).get(urls[i])
     await driver1.wait(until.elementLocated(By.xpath('//*[@id="top-level-buttons"]/ytd-toggle-button-renderer[1]/a'), 500))
     let viewelement = await (await (await driver1).findElement(By.xpath('//*[@id="count"]/yt-view-count-renderer/span[1]'))).getText()
