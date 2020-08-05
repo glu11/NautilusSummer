@@ -4,6 +4,8 @@ const chrome = require('selenium-webdriver/chrome')
 const options = new chrome.Options()
 options.addArguments('--disable-dev-shm-usage')
 options.addArguments('--no-sandbox')
+options.addArguments('--headless') 
+
 
 const driver = new Builder()
   .forBrowser('chrome')
