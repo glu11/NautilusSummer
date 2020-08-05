@@ -6,6 +6,7 @@ async function start() {
 
   options.addArguments('--disable-dev-shm-usage')
   options.addArguments('--no-sandbox')
+  options.addArguments('--headless') 
 
   const driver = new Builder()
     .forBrowser('chrome')
