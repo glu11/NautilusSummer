@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Math Search</title>
+
+    <script type="add" src="add"></script> <!-- need to add type and source--> 
+
+</head>
+<body>
+
+<section>
+    <div class="container">
+        <div class="section-heading text-center">
+            <h2>Welcome!</h2>
+            <p class="text-muted">Here is the video that best fits your needs!</p>
+            <hr>
+        </div>
+        <div class="container text-center">
+            <div id="showLink">  <!--add the id-->
+                <!-- The updated data will show here -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var vid_link = "<%- data %>"; //I think we keep this 
+    var newdiv1 = ( "<p>" + vid_link + "</p>" );
+    $("#showLink").append(newdiv1);
+</script>
+</body>
+</html>
