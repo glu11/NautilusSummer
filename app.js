@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 2200; //picked arbitrary #
-​
+const bodyParser  = require('body-parser');
 const { Builder, By, Key, util, until } = require("selenium-webdriver");
 var numeral = require('numeral');
 const chrome = require('selenium-webdriver/chrome')
@@ -9,38 +9,38 @@ const options = new chrome.Options()
 options.addArguments('--disable-dev-shm-usage')
 options.addArguments('--no-sandbox')
 options.addArguments('--headless')
-​
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
-});
-​
-​
+// ​
+// ​
 //const cp = require('child_process');
-​
+
 var link = "Null";
-var bool = false
-​
+var bool = false;
+
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set("view options", {layout: false});
+app.use('/', express.static(__dirname));
+app.use(bodyParser.json());
+
 app.post("/NemoText",(req,res) => {
-    // var user_data = req.body["specifics"];  //what we get from Nemobot user (the payload)
-    user_data = ['precalculus', 'overview', 'long']
-    link = await main(user_data); // call main(user_data)
+    var user_data = req.body["specifics"];  //what we get from Nemobot user (the payload)
+    // link = req.body["specifics"];
+    // console.log(link); // test the passed value
+    // user_data = ['precalculus', 'overview', 'long'];
+    link = main(user_data); // call main(user_data)
     bool = true
    // var link = cp.fork("./home/grant/programs/portfolio/HeadlessSearch.js", user_data); //Not 100% sure about the directory
    res.end();
 });
 
-if (bool == true) {
-  app.get("/search",(req,res)=>{
-    res.render('search.ejs',{data:link}); //not sure that's the data we want
+// if (bool) {
+app.get("/search",(req,res)=>{
+  res.render('search.ejs',{data:link}); //not sure that's the data we want
 });
-}
-​
-​
-​
-​
-​
-​
-​
+// }
+// ​​
+// ​// everything below this works
+// ​
 const driver = new Builder()
   .forBrowser('chrome')
   .setChromeOptions(options)
@@ -115,4 +115,7 @@ async function main(inputArr) {
 } 
 ​
 ​
-// module.exports = app;
+
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});
