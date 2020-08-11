@@ -117,8 +117,10 @@ async function main(input) {
   ytsearch(topic, vidlength)
 }
 
+module.exports = app;
 
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
+
