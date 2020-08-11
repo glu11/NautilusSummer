@@ -35,7 +35,7 @@ app.post("/Nemo",(req,res) => {
 
 // if (bool) {
 app.get("/testsearch",(req,res)=>{
-  res.render('search.ejs',{data:link}); //not sure that's the data we want
+  res.render('testsearch.ejs',{data:link}); //not sure that's the data we want
 });
 // }
 // ​​
