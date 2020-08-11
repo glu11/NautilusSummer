@@ -115,6 +115,7 @@ app.get("/testsearch",(req,res)=>{
 // } 
 // ​
 // ​
+module.exports = app;
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
