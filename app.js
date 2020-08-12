@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 2301; //picked arbitrary #
+const PORT = process.env.PORT || 2302; //picked arbitrary #
 const bodyParser = require('body-parser');
 const { Builder, By, Key, util, until } = require("selenium-webdriver");
 var numeral = require('numeral');
@@ -19,17 +19,17 @@ app.use('/', express.static(__dirname));
 app.use(bodyParser.json());
 
 app.post("/NemoText", async (req, res) => {
-  console.log('start post')
+  // console.log('start post')
   var text = req.body["specifics"];
   link = await main(text);
   embededlink = link.replace("watch?v=", "embed/")
-  console.log("done getting link"); // test the passed value
-  console.log("from post" + embededlink); // test the passed value
+  // console.log("done getting link"); // test the passed value
+  // console.log("from post" + embededlink); // test the passed value
   res.end();
 });
 
 app.get("/search", (req, res) => {
-  console.log('posting to webpage')
+  // console.log('posting to webpage')
   res.render('search.ejs', { data: embededlink }); //not sure that's the data we want
 });
 
@@ -82,17 +82,23 @@ async function main(input) {
       let dislikeelement = await ((await driver1.findElement(By.xpath('//*[@id="top-level-buttons"]/ytd-toggle-button-renderer[2]/a')))).getText()
       let viewcount = numeral(viewelement.toLowerCase()).value()
       let likecount = numeral(likeelement.toLowerCase()).value()
-      let dislikecount = numeral(dislikeelement.toLowerCase()).value()
-      let qualitycoefficient = (likecount / viewcount) * (likecount / (likecount + dislikecount))
-      coefficient[i] = qualitycoefficient
-      await (await driver1).quit()
+      if (viewcount === 0 || likecount === 0) {
+        coefficient[i] = 0
+        await driver1.quit()
+
+      } else {
+        let dislikecount = numeral(dislikeelement.toLowerCase()).value()
+        let qualitycoefficient = (likecount / viewcount) * (likecount / (likecount + dislikecount))
+        coefficient[i] = qualitycoefficient
+        await driver1.quit()
+
+      }
     }
 
   }
 
   async function getBestVid() {
     var indexOfMaxValue = await coefficient.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
-    console.log("from best video " + urls[indexOfMaxValue])
     bestvideo = urls[indexOfMaxValue]
 
   }
