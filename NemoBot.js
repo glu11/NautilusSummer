@@ -52,10 +52,9 @@ const state = (payload, say, sendButton) => {
 	subtopic = input_ary[1];
 	vidtype = input_ary[2];
 
-	var inputString = topic + " " + subtopic + " " + vidtype
-
 
 	if (payload === topic + '-' + subtopic + '-' + vidtype + '-N') {
+		var inputString = topic + " " + subtopic + " " + vidtype
 		axios({
 			method: 'post', //post or get?
 			baseURL: 'http://34.96.245.124:2300', //our server url
@@ -69,7 +68,7 @@ const state = (payload, say, sendButton) => {
 			.then((result) => { console.log(result.data) })
 			.catch((err) => { console.error(err) })
 
-		say("Your video can be viewed on http://34.96.245.124:2200/search")
+		say("Your video can be viewed on http://34.96.245.124:2300/search")
 		sendButton("Try again?", [{ title: 'Yes', payload: 'restart' }, 'No']);
 
 	}
