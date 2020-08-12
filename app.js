@@ -25,7 +25,7 @@ app.post("/NemoText", async (req, res) => {
   embededlink = link.replace("watch?v=", "embed/")
   // console.log("done getting link"); // test the passed value
   // console.log("from post" + embededlink); // test the passed value
-  res.end();
+  res.send('done');
 });
 
 app.get("/search", (req, res) => {

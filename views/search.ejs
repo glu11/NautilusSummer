@@ -3,30 +3,44 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+​
     <title>Math Search</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="add" src="add"></script> <!-- need to add type and source--> 
-
+    <style>
+        body {
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to bottom right,lightgrey, rgb(0, 183, 255));
+        }
+​
+        h2 {
+            color: black;
+            text-align: center;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            font-size: 40px;
+        }
+​
+        p {
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+​
 </head>
 <body>
-
+​
 <section>
     <div class="container">
         <div class="section-heading text-center">
-            <h2>Welcome!</h2>
-            <p class="text-muted">Here is the video that best fits your needs!</p>
-            <hr>
-            <iframe width="560" height="315" src= "<%- data %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="container text-center">
-            <div id="showLink">  <!--add the id-->
-                <!-- The updated data will show here -->
-            </div>
+            <h2>Welcome!!</h2>
+            <p class="text-muted">Here is the video that we felt would best help you learn! 😁</p>
+            <div align= "center"><iframe width="560" height="315" src= "<%- data %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         </div>
     </div>
 </section>
-
+​
 <script>
     // var vid_link = "<%- data %>"; 
     // var newdiv1 = ( "<p>" + vid_link + "</p>" );
