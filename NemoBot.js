@@ -58,7 +58,7 @@ const state = (payload, say, sendButton) => {
 	if (payload === topic + '-' + subtopic + '-' + vidtype + '-N') {
 		axios({
 			method: 'post', //post or get?
-			baseURL: 'http://34.96.245.124:2200', //our server url
+			baseURL: 'http://34.96.245.124:2300', //our server url
 			url: '/NemoText',
 			'Content-Type': 'application/json',
 			data: {
