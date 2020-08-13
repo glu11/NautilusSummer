@@ -134,7 +134,7 @@ const state = (payload, say, sendButton) => {
 		say("Great!💪 Now let us do the work and find the perfect video for you!🎬")
 		axios({
 			method: 'post', //post or get?
-			baseURL: 'http://34.96.245.124:2302', //our server url
+			baseURL: 'http://34.96.245.124:2305', //our server url
 			url: '/NemoText',
 			'Content-Type': 'application/json',
 			data: {
@@ -143,7 +143,7 @@ const state = (payload, say, sendButton) => {
 		})
 			.then((response) => {
 				if (response.data == 'done') {
-					say("Your video can be viewed on http://34.96.245.124:2302/search")
+					say("Your video can be viewed on http://34.96.245.124:2305/search")
 				}
 			})
 			.catch((err) => { console.error(err) })
