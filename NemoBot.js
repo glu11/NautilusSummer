@@ -116,13 +116,7 @@ const state = (payload, say, sendButton) => {
 	if (payload === topic + '-' + subtopic + '-N') {
 		sendButton('What kind of video are you looking for?📺', [{ title: 'Short Video', payload: topic + '-' + subtopic + '-short-N' }, { title: 'Long Video', payload: topic + '-' + subtopic + '-long-N' }]);
 	}
-	input_ary = payload.split('-');
-	topic = input_ary[0];
-	subtopic = input_ary[1];
-
-	if (payload === topic + '-' + subtopic + '-N') {
-		sendButton('What kind of video are you looking for?📺', [{ title: 'Short Video', payload: topic + '-' + subtopic + '-short-N' }, { title: 'Long Video', payload: topic + '-' + subtopic + '-long-N' }]);
-	}
+	
 	input_ary = payload.split('-');
 	topic = input_ary[0];
 	subtopic = input_ary[1];
@@ -132,6 +126,7 @@ const state = (payload, say, sendButton) => {
 	if (payload === topic + '-' + subtopic + '-' + vidtype + '-N') {
 		var inputString = topic + " " + subtopic + " " + vidtype
 		say("Great!💪 Now let us do the work and find the perfect video for you!🎬")
+		say("Right when we get the video, we'll send you the link to view it!")
 		axios({
 			method: 'post', //post or get?
 			baseURL: 'http://34.96.245.124:2305', //our server url
@@ -143,12 +138,12 @@ const state = (payload, say, sendButton) => {
 		})
 			.then((response) => {
 				if (response.data == 'done') {
-					say("Your video can be viewed on http://34.96.245.124:2305/search")
+					say("Your video can be viewed on http://34.96.245.124:2305/search 🎬")
+					sendButton("Try again?", [{ title: 'Yes', payload: 'restart' }, 'No']);
 				}
 			})
 			.catch((err) => { console.error(err) })
 
-		sendButton("Try again?", [{ title: 'Yes', payload: 'restart' }, 'No']);
 	}
 
 };
