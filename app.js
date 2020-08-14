@@ -84,12 +84,14 @@ async function main(input) {
       let likecount = numeral(likeelement.toLowerCase()).value()
       if (viewcount === 0 || likecount === 0) {
         coefficient[i] = 0
+        await driver1.close()
         await driver1.quit()
 
       } else {
         let dislikecount = numeral(dislikeelement.toLowerCase()).value()
         let qualitycoefficient = (likecount / viewcount) * (likecount / (likecount + dislikecount))
         coefficient[i] = qualitycoefficient
+        await driver1.close()
         await driver1.quit()
 
       }
@@ -103,7 +105,7 @@ async function main(input) {
 
   }
 
-
+  await (await driver).close()
   await (await driver).quit()
   return bestvideo
 }
