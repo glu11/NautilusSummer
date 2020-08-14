@@ -89,7 +89,7 @@ async function main(input) {
 
       } else {
         let dislikecount = numeral(dislikeelement.toLowerCase()).value()
-        let qualitycoefficient = (likecount / viewcount) * (likecount / (likecount + dislikecount))
+        let qualitycoefficient = (likecount * viewcount) * (likecount / (likecount + dislikecount))
         coefficient[i] = qualitycoefficient
         await driver1.close()
         await driver1.quit()

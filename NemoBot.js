@@ -116,7 +116,7 @@ const state = (payload, say, sendButton) => {
 	if (payload === topic + '-' + subtopic + '-N') {
 		sendButton('What kind of video are you looking for?📺', [{ title: 'Short Video', payload: topic + '-' + subtopic + '-short-N' }, { title: 'Long Video', payload: topic + '-' + subtopic + '-long-N' }]);
 	}
-	
+
 	input_ary = payload.split('-');
 	topic = input_ary[0];
 	subtopic = input_ary[1];
@@ -142,7 +142,11 @@ const state = (payload, say, sendButton) => {
 					sendButton("Try again?", [{ title: 'Yes', payload: 'restart' }, 'No']);
 				}
 			})
-			.catch((err) => { console.error(err) })
+			.catch((err) => {
+				console.error(err)
+				say("We encountered an error! 😢🎬")
+				sendButton("Sorry this is unusual! Try again?", [{ title: 'Yes', payload: 'restart' }, 'No'])
+			})
 
 	}
 
