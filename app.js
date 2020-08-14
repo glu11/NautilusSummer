@@ -104,7 +104,7 @@ async function main(input) {
   }
 
 
-  (await driver).quit
+  await (await driver).quit()
   return bestvideo
 }
 
