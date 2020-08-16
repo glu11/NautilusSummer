@@ -70,7 +70,7 @@ async function main(input) {
   }
 
   async function computeCoefficient() {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
       let driver1 = await new Builder()
         .forBrowser('chrome')
         .setChromeOptions(options)
@@ -89,7 +89,8 @@ async function main(input) {
 
       } else {
         let dislikecount = numeral(dislikeelement.toLowerCase()).value()
-        let qualitycoefficient = (likecount * viewcount) * (likecount / (likecount + dislikecount))
+        let likedislikeratio = (likecount / (likecount + dislikecount))
+        let qualitycoefficient = Math.log(viewcount) * Math.pow(likedislikeratio, 2)
         coefficient[i] = qualitycoefficient
         await driver1.close()
         await driver1.quit()

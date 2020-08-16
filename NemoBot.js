@@ -66,7 +66,7 @@ const state = (payload, say, sendButton) => {
 					{ title: 'Integrals', payload: 'calculus-integrals-N' },
 					{ title: 'Derivatives', payload: 'calculus-derivatives-N' },
 					{ title: 'Inverse trigonometry', payload: 'calculus-inverse trigonometry-N' },
-					{ title: 'Special Functions', payload: 'calculus-special functions-N' },
+					{ title: 'Volume', payload: 'calculus-volume-N' },
 					{ title: 'General Overview', payload: 'calculus-overview-N' }]);
 
 			});
@@ -77,11 +77,11 @@ const state = (payload, say, sendButton) => {
 			say(str).then(() => {
 				sendButton('So many topics to choose! Which one do you want to study?🤔',
 					[{ title: 'Introduction', payload: 'algebra-introduction-N' },
-					{ title: 'Linear Equations', payload: 'algebra-linear equations-N' },
+					{ title: 'System of Equations', payload: 'algebra-system of equations-N' },
 					{ title: 'Quadratic Equations', payload: 'algebra-quadratic equations-N' },
 					{ title: 'Functions', payload: 'algebra-functions-N' },
 					{ title: 'Polynomials', payload: 'algebra-polynomials-N' },
-					{ title: 'Exponentials', payload: 'algebra-exponentials-N' },
+					{ title: 'Exponential Functions', payload: 'algebra-exponential functions-N' },
 					{ title: 'General Overview', payload: 'algebra-overview-N' }]);
 
 			});
@@ -93,7 +93,6 @@ const state = (payload, say, sendButton) => {
 				sendButton('So many topics to choose! Which one do you want to study?🤔',
 					[{ title: 'Introduction', payload: 'geometry-introduction-N' },
 					{ title: 'Triangles', payload: 'geometry-triangles-N' },
-					{ title: 'Proofs', payload: 'geometry-proofs-N' },
 					{ title: 'Similarity', payload: 'geometry-similarity-N' },
 					{ title: 'Transformations', payload: 'geometry-transformations-N' },
 					{ title: 'Area', payload: 'geometry-area-N' },
@@ -114,7 +113,10 @@ const state = (payload, say, sendButton) => {
 	subtopic = input_ary[1];
 
 	if (payload === topic + '-' + subtopic + '-N') {
-		sendButton('What kind of video are you looking for?📺', [{ title: 'Short Video', payload: topic + '-' + subtopic + '-short-N' }, { title: 'Long Video', payload: topic + '-' + subtopic + '-long-N' }]);
+		sendButton('What kind of video are you looking for?📺',
+			[{ title: 'Short Video (<4 min)', payload: topic + '-' + subtopic + '-short-N' },
+			{ title: 'Long Video (>20 min)', payload: topic + '-' + subtopic + '-long-N' },
+			{ title: 'Either', payload: topic + '-' + subtopic + '-either-N' }]);
 	}
 
 	input_ary = payload.split('-');
@@ -124,7 +126,11 @@ const state = (payload, say, sendButton) => {
 
 
 	if (payload === topic + '-' + subtopic + '-' + vidtype + '-N') {
-		var inputString = topic + " " + subtopic + " " + vidtype
+		if (vidtype === 'either') {
+			var inputString = topic + " " + subtopic + " " + " "
+		} else {
+			var inputString = topic + " " + subtopic + " " + vidtype
+		}
 		say("Great!💪 Now let us do the work and find the perfect video for you!🎬")
 		say("Right when we get the video, we'll send you the link to view it!")
 		axios({
