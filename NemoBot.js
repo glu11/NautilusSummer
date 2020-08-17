@@ -116,20 +116,20 @@ const state = (payload, say, sendButton) => {
 		sendButton('What kind of video are you looking for?📺',
 			[{ title: 'Short Video (<4 min)', payload: topic + '-' + subtopic + '-short-N' },
 			{ title: 'Long Video (>20 min)', payload: topic + '-' + subtopic + '-long-N' },
-			{ title: 'Either', payload: topic + '-' + subtopic + '-either-N' }]);
+			{ title: 'Any length', payload: topic + '-' + subtopic + '-either-N' }]);
 	}
 
 	input_ary = payload.split('-');
 	topic = input_ary[0];
 	subtopic = input_ary[1];
 	vidtype = input_ary[2];
-
+	var inputString = ''
 
 	if (payload === topic + '-' + subtopic + '-' + vidtype + '-N') {
 		if (vidtype === 'either') {
-			var inputString = topic + " " + subtopic + " " + " "
+			inputString = topic + " " + subtopic + " " + " "
 		} else {
-			var inputString = topic + " " + subtopic + " " + vidtype
+			inputString = topic + " " + subtopic + " " + vidtype
 		}
 		say("Great!💪 Now let us do the work and find the perfect video for you!🎬")
 		say("Right when we get the video, we'll send you the link to view it!")
